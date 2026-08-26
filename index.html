@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jornal digital do Colégio Estadual Abílio Carneiro.">
+  <meta name="theme-color" content="#102a43">
+  <title>O Abílio em Foco | Jornal Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,700;9..144,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="newsstand">
+    <header class="masthead">
+      <a class="brand" href="./" aria-label="Voltar para a capa">
+        <img src="assets/logo.svg" alt="Símbolo do Colégio Estadual Abílio Carneiro">
+        <span>O Abílio<br><em>em foco</em></span>
+      </a>
+      <div class="edition-note">
+        <span class="eyebrow">Jornal digital</span>
+        <span id="editionDate">Edição especial</span>
+      </div>
+      <button class="icon-button" id="fullscreenButton" type="button" title="Tela cheia" aria-label="Abrir em tela cheia">⛶</button>
+    </header>
+
+    <section class="reader-shell" aria-label="Leitor do jornal">
+      <div class="reader-heading">
+        <div>
+          <span class="eyebrow">Coleção escolar</span>
+          <h1 id="paperTitle">O Abílio em Foco</h1>
+        </div>
+        <p class="reader-status" id="readerStatus" aria-live="polite">Preparando a edição...</p>
+      </div>
+
+      <div class="stage" id="stage">
+        <button class="page-arrow previous" id="previousButton" type="button" title="Página anterior" aria-label="Página anterior">←</button>
+        <div class="paper-wrap">
+          <div class="paper" id="paper" aria-live="polite"></div>
+          <div class="loading" id="loading" role="status">
+            <span class="spinner"></span>
+            <span>Carregando página...</span>
+          </div>
+        </div>
+        <button class="page-arrow next" id="nextButton" type="button" title="Próxima página" aria-label="Próxima página">→</button>
+      </div>
+
+      <nav class="reader-controls" aria-label="Controles do jornal">
+        <button class="control-button" id="firstButton" type="button">Capa</button>
+        <div class="page-counter"><span id="pageNumber">1</span><span class="counter-slash">/</span><span id="pageTotal">1</span></div>
+        <button class="control-button" id="lastButton" type="button">Última</button>
+      </nav>
+      <p class="reader-hint">Use as setas do teclado ou deslize a página para navegar</p>
+    </section>
+
+    <footer class="footer">
+      <span>Colégio Estadual Abílio Carneiro</span>
+      <span>Cleve­lândia · Paraná</span>
+    </footer>
+  </main>
+
+  <script src="content/pages.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
