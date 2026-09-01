@@ -126,30 +126,36 @@ function loadPages() {
 function goTo(target) {
   const pages = getCurrentPages();
   if (isTurning || target < 0 || target > pages.length || target === currentPage) return;
-  isTurning = true;
+
   const step = target > currentPage ? 1 : -1;
   const turningPage = paper.children[currentPage];
-  const destinationPage = paper.children[currentPage + step];
+  const destinationPage = paper.children[target];
+
+  if (!turningPage || !destinationPage) return;
+
+  isTurning = true;
+  updateControls();
+
   const direction = step > 0 ? "turning-next" : "turning-previous";
+
+  turningPage.classList.remove("turning-next", "turning-previous");
+  turningPage.classList.add(direction);
+  turningPage.style.zIndex = 2;
   destinationPage.classList.remove("page-hidden");
   destinationPage.classList.add("page-visible");
-  destinationPage.style.zIndex = 1;
-  turningPage.style.zIndex = 2;
-  turningPage.classList.add(direction);
-  const finishTurn = (event) => {
-    if (event.propertyName !== "transform") return;
-    turningPage.removeEventListener("transitionend", finishTurn);
-    turningPage.classList.remove(direction);
+  destinationPage.style.zIndex = 3;
+
+  setTimeout(() => {
+    turningPage.classList.remove(direction, "page-visible");
     turningPage.classList.add("page-hidden");
-    turningPage.classList.remove("page-visible");
-    currentPage += step;
+    destinationPage.classList.remove("page-hidden");
+    destinationPage.classList.add("page-visible");
+
+    currentPage = target;
     isTurning = false;
     updatePageStack();
     updateControls();
-    if (currentPage !== target) goTo(target);
-  };
-  turningPage.addEventListener("transitionend", finishTurn);
-  updateControls();
+  }, 620);
 }
 
 previousButton.addEventListener("click", () => goTo(currentPage - 1));
