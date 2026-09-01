@@ -5,21 +5,60 @@ const pageNumber = document.querySelector("#pageNumber");
 const pageTotal = document.querySelector("#pageTotal");
 const previousButton = document.querySelector("#previousButton");
 const nextButton = document.querySelector("#nextButton");
-const pages = window.JOURNAL_PAGES || [];
+const paperTitle = document.querySelector("#paperTitle");
+const classMenu = document.querySelector("#classMenu");
+const groups = window.JOURNAL_GROUPS || [{ id: "1A", label: "1A", title: "Turma 1A", pages: window.JOURNAL_PAGES || [] }];
+let currentGroupIndex = 0;
 let currentPage = 0;
 let isTurning = false;
 let touchStartX = null;
+
+function getCurrentGroup() {
+  return groups[currentGroupIndex];
+}
+
+function getCurrentPages() {
+  return getCurrentGroup().pages;
+}
 
 function formatDate(date) {
   return new Intl.DateTimeFormat("pt-BR", { month: "long", year: "numeric" }).format(date);
 }
 
+function renderClassMenu() {
+  classMenu.innerHTML = groups
+    .map(
+      (group, index) => `
+        <button
+          class="class-menu-item ${index === currentGroupIndex ? "active" : ""}"
+          type="button"
+          data-group-index="${index}"
+          aria-pressed="${index === currentGroupIndex}"
+        >
+          ${group.label}
+        </button>
+      `
+    )
+    .join("");
+
+  classMenu.querySelectorAll(".class-menu-item").forEach((button) => {
+    button.addEventListener("click", () => {
+      const targetIndex = Number(button.dataset.groupIndex);
+      if (Number.isNaN(targetIndex) || targetIndex === currentGroupIndex) return;
+      currentGroupIndex = targetIndex;
+      currentPage = 0;
+      loadPages();
+    });
+  });
+}
+
 function updateControls() {
+  const pages = getCurrentPages();
   pageNumber.textContent = String(currentPage + 1);
   pageTotal.textContent = String(pages.length + 1);
   previousButton.disabled = currentPage === 0 || isTurning;
   nextButton.disabled = currentPage === pages.length || isTurning;
-  status.textContent = currentPage === 0 ? "Capa da edição" : pages[currentPage - 1].title;
+  status.textContent = currentPage === 0 ? `Capa da ${getCurrentGroup().title}` : pages[currentPage - 1].title;
 }
 
 function updatePageStack() {
@@ -33,19 +72,20 @@ function updatePageStack() {
 function makeCover() {
   const cover = document.createElement("article");
   cover.className = "page cover";
+  const currentGroup = getCurrentGroup();
   cover.innerHTML = `
     <div class="cover-top">
       <img class="cover-logo" src="assets/logo.svg" alt="">
       <div>
-        <p class="cover-kicker">Edição especial</p>
-        <p class="cover-kicker">${formatDate(new Date())}</p>
+        <p class="cover-kicker">Publicações</p>
+        <p class="cover-kicker">${currentGroup.title}</p>
       </div>
     </div>
     <div>
       <p class="cover-kicker">Colégio Estadual</p>
       <h2 class="cover-title">O Abílio <em>em foco</em></h2>
       <div class="cover-rule"></div>
-      <p class="cover-description">Notícias, projetos e histórias que fazem parte da nossa comunidade escolar.</p>
+      <p class="cover-description">Notícias, projetos e histórias da turma ${currentGroup.label}.</p>
     </div>
     <div class="cover-footer"><span>Cleve­lândia · Paraná</span><strong>Jornal digital</strong></div>`;
   return cover;
@@ -69,6 +109,10 @@ function renderPage(entry) {
 }
 
 function loadPages() {
+  const pages = getCurrentPages();
+  const currentGroup = getCurrentGroup();
+  paperTitle.textContent = currentGroup.title;
+  paper.innerHTML = "";
   paper.appendChild(makeCover());
   for (const entry of pages) {
     paper.appendChild(renderPage(entry));
@@ -76,9 +120,11 @@ function loadPages() {
   loading.classList.add("hidden");
   updatePageStack();
   updateControls();
+  renderClassMenu();
 }
 
 function goTo(target) {
+  const pages = getCurrentPages();
   if (isTurning || target < 0 || target > pages.length || target === currentPage) return;
   isTurning = true;
   const step = target > currentPage ? 1 : -1;
@@ -109,13 +155,13 @@ function goTo(target) {
 previousButton.addEventListener("click", () => goTo(currentPage - 1));
 nextButton.addEventListener("click", () => goTo(currentPage + 1));
 document.querySelector("#firstButton").addEventListener("click", () => goTo(0));
-document.querySelector("#lastButton").addEventListener("click", () => goTo(pages.length));
+document.querySelector("#lastButton").addEventListener("click", () => goTo(getCurrentPages().length));
 document.querySelector("#fullscreenButton").addEventListener("click", () => document.documentElement.requestFullscreen?.());
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") goTo(currentPage + 1);
   if (event.key === "ArrowLeft") goTo(currentPage - 1);
   if (event.key === "Home") goTo(0);
-  if (event.key === "End") goTo(pages.length);
+  if (event.key === "End") goTo(getCurrentPages().length);
 });
 paper.addEventListener("touchstart", (event) => { touchStartX = event.changedTouches[0].screenX; }, { passive: true });
 paper.addEventListener("touchend", (event) => {
@@ -126,5 +172,5 @@ paper.addEventListener("touchend", (event) => {
 }, { passive: true });
 
 document.querySelector("#editionDate").textContent = formatDate(new Date());
-updateControls();
+renderClassMenu();
 loadPages();
