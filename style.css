@@ -220,12 +220,19 @@ h1 {
   border: 1px solid rgba(255,255,255,.12);
   text-transform: uppercase;
 }
-.stage { position: relative; display: flex; align-items: center; justify-content: center; gap: clamp(8px, 2.5vw, 38px); min-height: min(72vh, 820px); }
-.stage::before { content: ""; position: absolute; top: 50%; left: 8%; right: 8%; height: 1px; z-index: -1; background: linear-gradient(90deg, transparent, rgba(200,20,29,.35), transparent); }
+.stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2.5vw, 28px);
+  min-height: min(76vh, 860px);
+}
+.stage::before { content: ""; position: absolute; top: 50%; left: 5%; right: 5%; height: 1px; z-index: -1; background: linear-gradient(90deg, transparent, rgba(200,20,29,.35), transparent); }
 /* --- Efeito editorial premium (rollback fácil: remover esse bloco) --- */
 .paper-wrap {
   position: relative;
-  width: min(62vw, 620px);
+  width: min(72vw, 780px);
   max-width: 100%;
   aspect-ratio: 1 / 1.414;
   isolation: isolate;
@@ -375,9 +382,24 @@ h1 {
   .edition-note { font-size: 11px; }
   .icon-button { width: 36px; height: 36px; font-size: 20px; }
   .reader-heading { align-items: start; flex-direction: column; gap: 8px; }
-  .reader-status { text-align: left; }
-  .stage { min-height: auto; gap: 6px; }
-  .paper-wrap { width: calc(100vw - 78px); max-width: 620px; }
+  .reader-status {
+    max-width: 100%;
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px 10px 16px;
+    letter-spacing: .08em;
+  }
+  .stage {
+    min-height: auto;
+    gap: 6px;
+    align-items: stretch;
+    padding-bottom: 6px;
+  }
+  .paper-wrap {
+    width: min(96vw, 560px);
+    max-width: calc(100vw - 10px);
+    min-height: 62vh;
+  }
   .page-arrow { width: 34px; height: 34px; font-size: 20px; }
   .reader-controls { margin-top: 20px; gap: 12px; }
   .footer { flex-direction: column; gap: 5px; }
