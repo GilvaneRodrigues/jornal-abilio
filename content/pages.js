@@ -13,8 +13,8 @@ window.JOURNAL_GROUPS = [
   },
   {
     id: "2A-2C",
-    label: "2A e 2C",
-    title: "Turmas 2A e 2C",
+    label: "Literatura - 2A",
+    title: "Turma 2A",
     pages: [
       { title: "Literatura 2A", file: "content/Janaina-2a/Literatura 2a.jpeg", type: "image" },
       { title: "Literatura 2A", file: "content/Janaina-2a/Literatura1 2a.jpeg", type: "image" },
@@ -33,6 +33,21 @@ window.JOURNAL_GROUPS = [
       { title: "Geografia do Paraná", file: "content/Sergiana/Sergiana1.png", type: "image" },
       { title: "Geografia do Paraná", file: "content/Sergiana/Sergiana2.png", type: "image" },
       { title: "Geografia do Paraná", file: "content/Sergiana/Sergiana3.png", type: "image" }
+      
+    ]
+  },
+      {
+    id: "2C",
+    label: "Literatura - 2C",
+    title: "Turma 2C",
+    pages: [
+      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda1.jpeg", type: "image" },
+      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda2.jpeg", type: "image" },
+      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda3.jpeg", type: "image" },
+      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda4.jpeg", type: "image" },
+      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda5.jpeg", type: "image" },
+      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda6.jpeg", type: "image" },
+      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda7.jpeg", type: "image" }
       
     ]
   }
