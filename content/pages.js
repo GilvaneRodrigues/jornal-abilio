@@ -41,13 +41,13 @@ window.JOURNAL_GROUPS = [
     label: "Literatura - 2C",
     title: "Turma 2C",
     pages: [
-      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda1.jpeg", type: "image" },
-      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda2.jpeg", type: "image" },
-      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda3.jpeg", type: "image" },
-      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda4.jpeg", type: "image" },
-      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda5.jpeg", type: "image" },
-      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda6.jpeg", type: "image" },
-      { title: "Geografia do Paraná", file: "content/Fernanda/Fernanda7.jpeg", type: "image" }
+      { title: "Literatura", file: "content/Fernanda/Fernanda1.jpeg", type: "image" },
+      { title: "Literatura", file: "content/Fernanda/Fernanda2.jpeg", type: "image" },
+      { title: "Literatura", file: "content/Fernanda/Fernanda3.jpeg", type: "image" },
+      { title: "Literatura", file: "content/Fernanda/Fernanda4.jpeg", type: "image" },
+      { title: "Literatura", file: "content/Fernanda/Fernanda5.jpeg", type: "image" },
+      { title: "Literatura", file: "content/Fernanda/Fernanda6.jpeg", type: "image" },
+      { title: "Literatura", file: "content/Fernanda/Fernanda7.jpeg", type: "image" }
       
     ]
   }
