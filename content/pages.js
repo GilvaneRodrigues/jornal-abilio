@@ -23,6 +23,18 @@ window.JOURNAL_GROUPS = [
       { title: "Literatura 2A", file: "content/Janaina-2a/Literatura4 2a.jpeg", type: "image" }
       
     ]
+  },
+    {
+    id: "1A",
+    label: "Geografia do Paraná - 1A",
+    title: "Turma 1A",
+    pages: [
+      { title: "Geografia do Paraná", file: "content/Sergiana/Sergiana.png", type: "image" },
+      { title: "Geografia do Paraná", file: "content/Sergiana/Sergiana1.png", type: "image" },
+      { title: "Geografia do Paraná", file: "content/Sergiana/Sergiana2.png", type: "image" },
+      { title: "Geografia do Paraná", file: "content/Sergiana/Sergiana3.png", type: "image" }
+      
+    ]
   }
 ];
 
