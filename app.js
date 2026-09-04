@@ -6,7 +6,12 @@ const pageTotal = document.querySelector("#pageTotal");
 const previousButton = document.querySelector("#previousButton");
 const nextButton = document.querySelector("#nextButton");
 const paperTitle = document.querySelector("#paperTitle");
-const classMenu = document.querySelector("#classMenu");
+const intro = document.querySelector("#intro");
+const editionGrid = document.querySelector("#editionGrid");
+const introCount = document.querySelector("#introCount");
+const exploreButton = document.querySelector("#exploreButton");
+const homeButton = document.querySelector("#homeButton");
+const brand = document.querySelector(".brand");
 const groups = window.JOURNAL_GROUPS || [{ id: "1A", label: "1A", title: "Turma 1A", pages: window.JOURNAL_PAGES || [] }];
 let currentGroupIndex = 0;
 let currentPage = 0;
@@ -21,35 +26,44 @@ function getCurrentPages() {
   return getCurrentGroup().pages;
 }
 
-function formatDate(date) {
-  return new Intl.DateTimeFormat("pt-BR", { month: "long", year: "numeric" }).format(date);
+function renderIntro() {
+  introCount.textContent = `${groups.length} edições disponíveis`;
+  editionGrid.innerHTML = groups.map((group, index) => {
+    const firstPage = group.pages[0];
+    return `
+      <button class="edition-card ${index === 0 ? "featured" : ""}" type="button" data-intro-group-index="${index}">
+        <span class="edition-card-image" style="background-image: url('${firstPage?.file || "assets/logo.svg"}')"></span>
+        <span class="edition-card-shade"></span>
+        <span class="edition-card-body">
+          <span class="edition-card-number">0${index + 1}</span>
+          <strong>${group.label}</strong>
+          <span class="edition-card-open">Abrir edição <b aria-hidden="true">↗</b></span>
+        </span>
+      </button>`;
+  }).join("");
+
+  editionGrid.querySelectorAll("[data-intro-group-index]").forEach((button) => {
+    button.addEventListener("click", () => openReader(Number(button.dataset.introGroupIndex), true));
+  });
 }
 
-function renderClassMenu() {
-  classMenu.innerHTML = groups
-    .map(
-      (group, index) => `
-        <button
-          class="class-menu-item ${index === currentGroupIndex ? "active" : ""}"
-          type="button"
-          data-group-index="${index}"
-          aria-pressed="${index === currentGroupIndex}"
-        >
-          ${group.label}
-        </button>
-      `
-    )
-    .join("");
+function openReader(groupIndex = 0, openFirstImage = false) {
+  if (!Number.isInteger(groupIndex) || !groups[groupIndex]) return;
+  currentGroupIndex = groupIndex;
+  currentPage = openFirstImage && groups[groupIndex].pages.length > 0 ? 1 : 0;
+  intro.classList.add("intro-hidden");
+  document.body.classList.add("reader-open");
+  loadPages();
+}
 
-  classMenu.querySelectorAll(".class-menu-item").forEach((button) => {
-    button.addEventListener("click", () => {
-      const targetIndex = Number(button.dataset.groupIndex);
-      if (Number.isNaN(targetIndex) || targetIndex === currentGroupIndex) return;
-      currentGroupIndex = targetIndex;
-      currentPage = 0;
-      loadPages();
-    });
-  });
+function showIntro(event) {
+  event?.preventDefault();
+  intro.classList.remove("intro-hidden");
+  document.body.classList.remove("reader-open");
+}
+
+function formatDate(date) {
+  return new Intl.DateTimeFormat("pt-BR", { month: "long", year: "numeric" }).format(date);
 }
 
 function updateControls() {
@@ -120,7 +134,6 @@ function loadPages() {
   loading.classList.add("hidden");
   updatePageStack();
   updateControls();
-  renderClassMenu();
 }
 
 function goTo(target) {
@@ -178,5 +191,8 @@ paper.addEventListener("touchend", (event) => {
 }, { passive: true });
 
 document.querySelector("#editionDate").textContent = formatDate(new Date());
-renderClassMenu();
+exploreButton.addEventListener("click", () => openReader(0));
+homeButton.addEventListener("click", showIntro);
+brand.addEventListener("click", showIntro);
+renderIntro();
 loadPages();

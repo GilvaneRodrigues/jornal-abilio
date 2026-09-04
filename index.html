@@ -12,16 +12,44 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="newsstand">
-    <aside class="sidebar" aria-label="Menu de turmas">
-      <div class="sidebar-panel">
-        <p class="sidebar-label">Turmas</p>
-        <nav class="class-menu" id="classMenu" aria-label="Turmas do jornal"></nav>
+  <section class="intro" id="intro" aria-labelledby="introTitle">
+    <div class="intro-noise" aria-hidden="true"></div>
+    <div class="intro-topline">
+      <span>Colégio Estadual Abílio Carneiro</span>
+      <span>Cleve­lândia · Paraná</span>
+    </div>
+    <div class="intro-hero">
+      <div class="intro-copy">
+        <div class="intro-brandline">
+          <img src="assets/logo.svg" alt="">
+          <span>Jornal digital</span>
+        </div>
+        <p class="intro-kicker">Edição escolar · 2026</p>
+        <h1 id="introTitle">O Abílio<br><em>em foco</em></h1>
+        <p class="intro-lead">Histórias, projetos e ideias que fazem parte da nossa escola.</p>
+        <button class="intro-action" id="exploreButton" type="button">
+          <span>Explorar as edições</span><strong aria-hidden="true">→</strong>
+        </button>
       </div>
-    </aside>
+      <div class="intro-stamp" aria-hidden="true">
+        <span>ABÍLIO</span>
+        <strong>AC</strong>
+        <span>EM FOCO</span>
+      </div>
+    </div>
+    <div class="intro-editions">
+      <div class="intro-section-heading">
+        <span class="intro-kicker">Nossas publicações</span>
+        <span class="intro-count" id="introCount"></span>
+      </div>
+      <div class="edition-grid" id="editionGrid"></div>
+    </div>
+  </section>
 
+  <main class="newsstand">
     <div class="content-panel">
       <header class="masthead">
+        <button class="home-button" id="homeButton" type="button" title="Voltar para a página inicial"><span aria-hidden="true">←</span> Início</button>
         <a class="brand" href="./" aria-label="Voltar para a capa">
           <div class="brand-mark">
             <img src="assets/logo.svg" alt="Símbolo do Colégio Estadual Abílio Carneiro">
