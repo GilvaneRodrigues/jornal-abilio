@@ -20,7 +20,8 @@ window.JOURNAL_GROUPS = [
       { title: "Literatura 2A", file: "content/Janaina-2a/Literatura1 2a.jpeg", type: "image" },
       { title: "Literatura 2A", file: "content/Janaina-2a/Literatura2 2a.jpeg", type: "image" },
       { title: "Literatura 2A", file: "content/Janaina-2a/Literatura3 2a.jpeg", type: "image" },
-      { title: "Literatura 2A", file: "content/Janaina-2a/Literatura4 2a.jpeg", type: "image" }
+      { title: "Literatura 2A", file: "content/Janaina-2a/Literatura4 2a.jpeg", type: "image" },
+      { title: "Literatura 2A", file: "content/Janaina-2a/Literatura5 2a.jpeg", type: "image" }
 
     ]
   },
